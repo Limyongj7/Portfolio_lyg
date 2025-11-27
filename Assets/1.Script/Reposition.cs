@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class Reposition : MonoBehaviour
 {
+    Collider coll;
+
+    private void Awake()
+    {
+        coll = GetComponent<Collider>();
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag ("Area"))
@@ -24,14 +31,19 @@ public class Reposition : MonoBehaviour
             case "Ground":
                 if (diffX > diffZ)
                 {
-                    transform.Translate(Vector3.right * dirX * 30);
+                    transform.Translate(Vector3.right * dirX * 60);
                 }
                 else if (diffX < diffZ)
                 {
-                    transform.Translate(Vector3.forward * dirZ * 30);
+                    transform.Translate(Vector3.forward * dirZ * 60);
                 }
                 break;
             case "Enemy":
+                if (coll.enabled)
+                {
+                    transform.Translate(playerDir * 30 + new Vector3(Random.Range(-3f, 3f), 0f, Random.Range(-3f, 3f)));
+                }
+
 
                 break;
         }
