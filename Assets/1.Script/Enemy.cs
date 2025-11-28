@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() //Player어에게 가는 움직임, Enemy 회전
     {
         if (!isLive)
             return;
@@ -41,4 +41,11 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    private void OnEnable()
+    {
+        target = GameManager.instance.player.GetComponent<Rigidbody>();
+    }
+
+
 }
