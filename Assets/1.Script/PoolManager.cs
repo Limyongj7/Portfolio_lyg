@@ -3,40 +3,73 @@ using UnityEngine;
 
 public class PoolManager : MonoBehaviour
 {
-    public GameObject[] prefabs;
-
-    List<GameObject>[] pools;
-
+    public GameObject[] enemyPrefabs;
+    List<GameObject>[] ePool;
+    
+    public GameObject[] weaponPrefabs;
+    List<GameObject>[] wPool;
 
     private void Awake()
     {
-        pools = new List<GameObject>[prefabs.Length];
+        ePool = new List<GameObject>[enemyPrefabs.Length];
+        wPool = new List<GameObject>[weaponPrefabs.Length];
 
-        for (int i = 0; i < pools.Length; i++)
+        for (int i = 0; i < ePool.Length; i++)
         {
-            pools[i] = new List<GameObject>();
+            ePool[i] = new List<GameObject>();
         }
+
+        for (int i = 0; i < wPool.Length; i++)
+        {
+            wPool[i] = new List<GameObject>();
+        }
+
+
     }
 
-    public GameObject Get(int index)
+    public GameObject Eget(int index) //  몬스터 풀링
     {
         GameObject select = null;
 
 
-        foreach (GameObject item in pools[index])
+        foreach (GameObject item in ePool[index])
         {
             if(!item.activeSelf)
             {
                 select = item;
-                select.SetActive(false);
+                select.SetActive(true);
                 break;
             }
         }    
 
         if (!select)
         {
-            select = Instantiate(prefabs[index], transform);
-            pools[index].Add(select);
+            select = Instantiate(enemyPrefabs[index], transform);
+            ePool[index].Add(select);
+        }
+
+
+        return select;
+    }
+    public GameObject Wget(int index)  //  총알 풀링
+    {
+        GameObject select = null;
+
+
+        foreach (GameObject item in wPool[index])
+        {
+            if (!item.activeSelf)
+            {
+                select = item;
+                select.SetActive(true);
+                break;
+            }
+        }
+
+        if (!select)
+        {
+            select = Instantiate(weaponPrefabs[index], transform);
+            wPool[index].Add(select);
         }
 
 

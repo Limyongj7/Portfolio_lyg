@@ -3,11 +3,15 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
+    public float health;
+    public float maxHealt;
+
     public Rigidbody target;
 
-    public float rotateSpeed = 10f;
 
-    bool isLive = true;
+    private float rotateSpeed = 10f;
+
+    bool isLive;
 
     Rigidbody rd;
 
@@ -45,7 +49,36 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         target = GameManager.instance.player.GetComponent<Rigidbody>();
+        isLive = true;
+        health = maxHealt;
     }
 
+    public void Init(SpawnData data)
+    {
+        speed = data.speed;
+        maxHealt = data.health;
+        health = data.health;
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.CompareTag("Bullet"))
+            return;
+
+        health -= other.GetComponent<Bullet>().damage;
+
+        if (health >0 )
+        {
+
+        }
+        else
+        {
+            Dead();
+        }
+    }
+
+    void Dead()
+    {
+        gameObject.SetActive(false);
+    }
 }
