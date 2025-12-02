@@ -4,7 +4,7 @@ public class Player : MonoBehaviour
 {
     public Vector3 inputVec;
     public float speed;
-
+    public Scanner scanner;
 
     Rigidbody rd;
     Animator anim;
@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     {
         rd = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+        scanner = GetComponent<Scanner>(); 
     }
    
     void Update()
