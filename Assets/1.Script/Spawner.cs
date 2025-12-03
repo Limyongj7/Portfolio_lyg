@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
 
+    public Transform player;
 
     int level;
     float timer;
@@ -17,6 +18,7 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        transform.position = player.position;
         timer += Time.deltaTime;
         level = Mathf.Min(Mathf.FloorToInt(GameManager.instance.gameTime / 10f), spawnData.Length - 1);
 

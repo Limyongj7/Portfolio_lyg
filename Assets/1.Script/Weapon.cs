@@ -65,7 +65,7 @@ public class Weapon : MonoBehaviour
                 Batch(); // ±Ÿ¡¢?
                 break;
             default:
-                speed = 0.3f;
+                speed = 1f;
                 break;
         }
     }
@@ -101,14 +101,20 @@ public class Weapon : MonoBehaviour
         if (!player.scanner.nearestTarget)
             return;
 
+        player.OnShoot();
+
         Vector3 targetPos = player.scanner.nearestTarget.position;
         Vector3 dir =targetPos - transform.position;
+
+        dir.y = 0f;
+
         dir = dir.normalized;
 
         Transform bullet = GameManager.instance.pool.Wget(prefabId).transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.forward, dir);
         bullet.GetComponent<Bullet>().Init(damage, count, dir);
+        
     }
 
 }

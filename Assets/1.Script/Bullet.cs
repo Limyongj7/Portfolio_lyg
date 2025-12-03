@@ -4,6 +4,8 @@ public class Bullet : MonoBehaviour
 {
     public float damage;
     public int per;
+    public float speed;
+
     Rigidbody rd;
 
 
@@ -18,7 +20,7 @@ public class Bullet : MonoBehaviour
 
         if (per > -1)
         {
-            rd.linearVelocity = dir * 15f;
+            rd.linearVelocity = dir * speed;
         }
     }
 

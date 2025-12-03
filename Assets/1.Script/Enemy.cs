@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -5,6 +7,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float health;
     public float maxHealt;
+    
 
     public Rigidbody target;
 
@@ -14,20 +17,23 @@ public class Enemy : MonoBehaviour
     bool isLive;
 
     Rigidbody rd;
+    Animator anim;
+    WaitForFixedUpdate wait;
 
     private void Awake()
     {
         rd = GetComponent<Rigidbody>();
+        anim = GetComponent<Animator>();
+        wait = new WaitForFixedUpdate ();
 
     }
 
     private void FixedUpdate() //Player어에게 가는 움직임, Enemy 회전
     {
-        if (!isLive)
+        if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 
         Vector3 dirVec = target.position - rd.position;
-
         Vector3 nextVec = dirVec.normalized * speed * Time.fixedDeltaTime;
         rd.MovePosition(rd.position + nextVec);
         rd.linearVelocity = Vector3.zero;
@@ -66,16 +72,27 @@ public class Enemy : MonoBehaviour
             return;
 
         health -= other.GetComponent<Bullet>().damage;
+        StartCoroutine(KnockBack());
 
         if (health >0 )
         {
-
+            anim.SetTrigger("Hit");
         }
         else
         {
             Dead();
         }
     }
+
+    IEnumerator KnockBack()
+    {
+        yield return wait; // 다음 하나의 물리 프레임 딜레이
+        Vector3 playerPos = GameManager.instance.player.transform.position;
+        Vector3 dirVec = transform.position - playerPos;
+
+        rd.AddForce(dirVec.normalized*3, ForceMode.Impulse);
+    }
+
 
     void Dead()
     {

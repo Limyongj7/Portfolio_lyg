@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    float lastShootTime;
+    public float shootHoldTime = 0.15f;
+
+    public float rotateSpeed;
     public Vector3 inputVec;
     public float speed;
     public Scanner scanner;
+
 
     Rigidbody rd;
     Animator anim;
@@ -13,9 +18,9 @@ public class Player : MonoBehaviour
     {
         rd = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        scanner = GetComponent<Scanner>(); 
+        scanner = GetComponent<Scanner>();
     }
-   
+
     void Update()
     {
         inputVec.x = Input.GetAxisRaw("Horizontal");
@@ -26,12 +31,50 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 nextVec = inputVec.normalized * speed *Time.fixedDeltaTime;
+        Vector3 nextVec = inputVec.normalized * speed * Time.fixedDeltaTime;
         rd.MovePosition(rd.position + nextVec);
     }
 
     private void LateUpdate()
     {
+        // 애니메이션
         anim.SetFloat("Speed", inputVec.magnitude);
+
+        // 스캐너가 없거나, 스캐너가 타겟을 못 잡으면 회전하지 않음
+        if (scanner == null || scanner.nearestTarget == null)
+            return;
+
+        // 바라볼 방향 계산
+        Vector3 dir = scanner.nearestTarget.position - transform.position;
+        dir.y = 0f;   // Y축 회전만 남기기 (위/아래 기울어짐 방지)
+
+        // 너무 가까우면 회전 계산 패스
+        if (dir.sqrMagnitude < 0.0001f)
+            return;
+
+        // 목표 회전값 계산
+        Quaternion targetRot = Quaternion.LookRotation(dir);
+
+        // 부드럽게 회전
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,
+            targetRot,
+            rotateSpeed * Time.deltaTime
+        );
+
+        // 사격 안 한지 일정 시간 지나면 Shoot 끄기
+        if (anim.GetBool("Shoot") && Time.time - lastShootTime > shootHoldTime)
+        {
+            anim.SetBool("Shoot", false);
+        }
+
     }
+
+    public void OnShoot()
+    {
+        lastShootTime = Time.time;
+        anim.SetBool("Shoot", true);
+    }
+
+
 }
