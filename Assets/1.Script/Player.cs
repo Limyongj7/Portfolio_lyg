@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    float lastShootTime;
-    public float shootHoldTime = 0.15f;
-
     public float rotateSpeed;
     public Vector3 inputVec;
     public float speed;
@@ -62,18 +59,6 @@ public class Player : MonoBehaviour
             rotateSpeed * Time.deltaTime
         );
 
-        // 사격 안 한지 일정 시간 지나면 Shoot 끄기
-        if (anim.GetBool("Shoot") && Time.time - lastShootTime > shootHoldTime)
-        {
-            anim.SetBool("Shoot", false);
-        }
-
-    }
-
-    public void OnShoot()
-    {
-        lastShootTime = Time.time;
-        anim.SetBool("Shoot", true);
     }
 
 

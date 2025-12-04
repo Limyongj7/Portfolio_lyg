@@ -65,7 +65,7 @@ public class Weapon : MonoBehaviour
                 Batch(); // ±Ÿ¡¢?
                 break;
             default:
-                speed = 1f;
+                speed = 0.5f;
                 break;
         }
     }
@@ -100,8 +100,6 @@ public class Weapon : MonoBehaviour
     {
         if (!player.scanner.nearestTarget)
             return;
-
-        player.OnShoot();
 
         Vector3 targetPos = player.scanner.nearestTarget.position;
         Vector3 dir =targetPos - transform.position;

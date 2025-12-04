@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public float health;
     public float maxHealt;
-    
+
 
     public Rigidbody target;
 
@@ -17,14 +17,16 @@ public class Enemy : MonoBehaviour
     bool isLive;
 
     Rigidbody rd;
+    Collider coll;
     Animator anim;
     WaitForFixedUpdate wait;
 
     private void Awake()
     {
         rd = GetComponent<Rigidbody>();
+        coll = GetComponent<Collider>();
         anim = GetComponent<Animator>();
-        wait = new WaitForFixedUpdate ();
+        wait = new WaitForFixedUpdate();
 
     }
 
@@ -56,6 +58,10 @@ public class Enemy : MonoBehaviour
     {
         target = GameManager.instance.player.GetComponent<Rigidbody>();
         isLive = true;
+
+        coll.enabled = true;
+        rd.isKinematic = false;
+        anim.SetBool("Dead", false);
         health = maxHealt;
     }
 
@@ -68,19 +74,29 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("Bullet"))
+        if (!other.CompareTag("Bullet") || !isLive)
             return;
 
         health -= other.GetComponent<Bullet>().damage;
         StartCoroutine(KnockBack());
 
-        if (health >0 )
+        if (health > 0)
         {
             anim.SetTrigger("Hit");
         }
         else
         {
-            Dead();
+            isLive = false;
+
+            coll.enabled = false;
+            rd.isKinematic = true;
+            anim.SetBool("Dead", true);
+
+            StartCoroutine(DeadRoutine()); // 죽는 애니매이션 딜레이 코르틴 실행
+
+            GameManager.instance.kill++;
+            GameManager.instance.GetExp();
+
         }
     }
 
@@ -90,12 +106,18 @@ public class Enemy : MonoBehaviour
         Vector3 playerPos = GameManager.instance.player.transform.position;
         Vector3 dirVec = transform.position - playerPos;
 
-        rd.AddForce(dirVec.normalized*3, ForceMode.Impulse);
+        rd.AddForce(dirVec.normalized * 3, ForceMode.Impulse);
     }
 
 
     void Dead()
     {
+        gameObject.SetActive(false);
+    }
+
+    IEnumerator DeadRoutine() // 죽는 애니매이션 실행 관련 비활성화 딜레이
+    {
+        yield return new WaitForSeconds(2f); // Dead 애니 길이
         gameObject.SetActive(false);
     }
 }

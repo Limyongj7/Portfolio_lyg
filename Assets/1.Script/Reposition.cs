@@ -32,11 +32,11 @@ public class Reposition : MonoBehaviour
 
                 if (diffX > diffZ)
                 {
-                    transform.Translate(Vector3.right * dirX * 60);
+                    transform.Translate(Vector3.right * dirX * 90);
                 }
                 else if (diffX < diffZ)
                 {
-                    transform.Translate(Vector3.forward * dirZ * 60);
+                    transform.Translate(Vector3.forward * dirZ * 90);
                 }
                 break;
             case "Enemy":

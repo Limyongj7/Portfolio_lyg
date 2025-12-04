@@ -28,6 +28,7 @@ public class Bullet : MonoBehaviour
     {
         if (!other.CompareTag("Enemy") || per == -1)
             return;
+
         per--;
 
         if (per == -1)
