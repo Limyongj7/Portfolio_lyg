@@ -10,7 +10,7 @@ public class ItemData : ScriptableObject
     public int itemId;
     public string itemName;
     public string itemDesc;
-    public GameObject objectIcon;
+    public Sprite itemIcon;
 
     [Header("# Level Data")]
     public float baseDamage;
@@ -19,5 +19,5 @@ public class ItemData : ScriptableObject
     public int[] counts;
 
     [Header("# Weapon")]
-    public GameManager projectile;
+    public GameObject projectile;
 }
