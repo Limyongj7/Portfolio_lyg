@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptble Object/ItemData")]
 public class ItemData : ScriptableObject
 {
-    public enum ItemType { Melee, Range, Glove, shoe, Heal }
+    public enum ItemType { IAS, shoe, Heal, Pistol }
 
     [Header("# Main Info")]
     public ItemType itemType;
@@ -14,9 +14,9 @@ public class ItemData : ScriptableObject
 
     [Header("# Level Data")]
     public float baseDamage;
-    public int baseCount;
+    public int basePer;
     public float[] damages;
-    public int[] counts;
+    public int[] per;
 
     [Header("# Weapon")]
     public GameObject projectile;

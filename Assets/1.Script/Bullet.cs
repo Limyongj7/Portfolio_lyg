@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
         this.damage = damage;
         this.per = per;
 
-        if (per > -1)
+        if (per > -1) //  확인 필요
         {
             rd.linearVelocity = dir * speed;
         }
@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("Enemy") || per == -1)
-            return;
+            return; // 확인 필요
 
         per--;
 

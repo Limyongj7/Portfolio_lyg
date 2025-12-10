@@ -5,7 +5,7 @@ public class Weapon : MonoBehaviour
     public int id;
     public int prefabId;
     public float damage;
-    public int count;
+    public int per;
     public float speed;
 
     float timer;
@@ -13,13 +13,7 @@ public class Weapon : MonoBehaviour
 
     private void Awake()
     {
-        player = GetComponentInParent<Player>();    
-    }
-
-
-    private void Start()
-    {
-        Init();
+        player = GameManager.instance.player;
     }
 
     private void Update()
@@ -27,16 +21,16 @@ public class Weapon : MonoBehaviour
         switch (id)
         {
             case 0:
-                transform.Rotate(Vector3.up * speed * Time.deltaTime); // 辟立
-                break;
-            default:
                 timer += Time.deltaTime;
 
-                if(timer > speed)
+                if (timer > speed)
                 {
                     timer = 0f;
                     Fire();
                 }
+                break;
+            default:
+
                 break;
         }
 
@@ -47,52 +41,42 @@ public class Weapon : MonoBehaviour
         }
     }
 
-    public void LevelUP(float damage, int count)
+    public void LevelUP(float damage, int per)
     {
         this.damage = damage;
-        this.count += count;
+        this.per += per;
 
-        if (id == 0)
-            Batch();
     }
 
-    public void Init()
+    public void Init(ItemData data)
     {
+        // Basic set
+        name = "Weapon" + data.itemId;
+        transform.parent = player.transform;
+        transform.localPosition = Vector3.zero;
+
+        // Property
+        id = data.itemId;
+        damage = data.baseDamage;
+        per = data.basePer;
+
+        for (int index = 0; index < GameManager.instance.pool.weaponPrefabs.Length; index++)
+        {
+            if (data.projectile == GameManager.instance.pool.weaponPrefabs[index])
+            {
+                prefabId = index;
+                break;
+            }
+        }
+
         switch (id)
         {
             case 0:
-                speed = -150; // 辟立
-                Batch(); // 辟立?
-                break;
-            default:
                 speed = 0.5f;
                 break;
-        }
-    }
+            default:
 
-    void Batch()
-    {
-        for (int index = 0; index < count; index++)
-        {
-            Transform bullet;
-
-            if (index < transform.childCount)
-            {
-                bullet = transform.GetChild(index);
-            }
-            else
-            {
-                bullet = GameManager.instance.pool.Wget(prefabId).transform;
-                bullet.parent = transform;
-            }
-            
-            bullet.localPosition = Vector3.zero;
-            bullet.localRotation = Quaternion.identity;
-            
-            Vector3 rotVec = Vector3.up * 360 * index / count; // 辟立
-            bullet.Rotate(rotVec);  // 辟立
-            bullet.Translate(bullet.forward * 1.5f, Space.World); //辟立
-            bullet.GetComponent<Bullet>().Init(damage, -1, Vector3.zero);
+                break;
         }
     }
 
@@ -102,7 +86,7 @@ public class Weapon : MonoBehaviour
             return;
 
         Vector3 targetPos = player.scanner.nearestTarget.position;
-        Vector3 dir =targetPos - transform.position;
+        Vector3 dir = targetPos - transform.position;
 
         dir.y = 0f;
 
@@ -111,8 +95,8 @@ public class Weapon : MonoBehaviour
         Transform bullet = GameManager.instance.pool.Wget(prefabId).transform;
         bullet.position = transform.position;
         bullet.rotation = Quaternion.FromToRotation(Vector3.forward, dir);
-        bullet.GetComponent<Bullet>().Init(damage, count, dir);
-        
+        bullet.GetComponent<Bullet>().Init(damage, per, dir);
+
     }
 
 }
