@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Follow : MonoBehaviour
+public class Follow : MonoBehaviour // 체력바 캐릭터 고정 스크립트
 {
     RectTransform rect;
     Vector3 offset;
