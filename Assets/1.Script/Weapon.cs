@@ -53,7 +53,7 @@ public class Weapon : MonoBehaviour
         // Basic set
         name = "Weapon" + data.itemId;
         transform.parent = player.transform;
-        transform.localPosition = Vector3.zero;
+        transform.localPosition = new Vector3(0f, 1f, 0f);
 
         // Property
         id = data.itemId;
@@ -71,7 +71,7 @@ public class Weapon : MonoBehaviour
 
         switch (id)
         {
-            case 0:
+            case 20:
                 speed = 0.5f;
                 break;
             default:
