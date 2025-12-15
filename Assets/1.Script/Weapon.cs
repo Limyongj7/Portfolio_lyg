@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     {
         switch (id)
         {
-            case 20:
+            case 20: // 피스톨
                 timer += Time.deltaTime;
 
                 if (timer > speed)
@@ -29,7 +29,7 @@ public class Weapon : MonoBehaviour
                     Fire();
                 }
                 break;
-            default:
+            default: // 다른무기
 
                 break;
         }
@@ -46,6 +46,7 @@ public class Weapon : MonoBehaviour
         this.damage = damage;
         this.per += per;
 
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 가지고 있는 모든 자식에게 ApplyGear 메서드를 한번씩 실행해라
     }
 
     public void Init(ItemData data)
@@ -71,13 +72,14 @@ public class Weapon : MonoBehaviour
 
         switch (id)
         {
-            case 20:
+            case 20: // 피스톨
                 speed = 0.5f;
                 break;
-            default:
+            default: // 다른무기
 
                 break;
         }
+        player.BroadcastMessage("ApplyGear", SendMessageOptions.DontRequireReceiver); // 가지고 있는 모든 자식에게 ApplyGear 메서드를 한번씩 실행해라
     }
 
     void Fire() //  총알 생성 스크립트

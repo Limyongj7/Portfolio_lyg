@@ -6,6 +6,7 @@ public class Item : MonoBehaviour
     public ItemData data;
     public int level;
     public Weapon weapon;
+    public Gear gear;
 
     Image icon;
     Text textLevel;
@@ -29,22 +30,48 @@ public class Item : MonoBehaviour
         switch (data.itemType)
         {
             case ItemData.ItemType.IAS:
-                break;
             case ItemData.ItemType.shoe:
+                if(level == 0)
+                {
+                    GameObject newGear = new GameObject();
+                    gear = newGear.AddComponent<Gear>();
+                    gear.Init(data);
+                }
+                else
+                {
+                    float nextRate = data.damages[level];
+                    gear.LevelUp(nextRate);
+                }
+                level++; // 레벨 제한
                 break;
+
+
             case ItemData.ItemType.Heal:
+                GameManager.instance.health = GameManager.instance.maxHealth;
                 break;
+
+
             case ItemData.ItemType.Pistol:
                 if (level == 0)
-                {
+                { 
                     GameObject newWeapon = new GameObject();
                     weapon = newWeapon.AddComponent<Weapon>();
                     weapon.Init(data);
                 }
-                break;
-        }
+                else
+                {
+                    float nextDamage = data.baseDamage;
+                    int nextPer = 0;
 
-        level++;
+                    nextDamage = +data.baseDamage * data.damages[level];
+                    nextPer += data.per[level];
+
+                    weapon.LevelUP(nextDamage, nextPer);
+                }
+                level++; // 레벨 제한
+                break;
+
+        }
 
         if (level == data.damages.Length)
         {
