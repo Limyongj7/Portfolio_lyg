@@ -32,6 +32,9 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate() //Player어에게 가는 움직임, Enemy 회전
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         if (!isLive || anim.GetCurrentAnimatorStateInfo(0).IsName("Hit"))
             return;
 

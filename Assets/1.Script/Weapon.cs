@@ -18,13 +18,16 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.instance.isLive)
+            return;
+
         switch (id)
         {
-            case 20: // 피스톨
+            case 0: // 피스톨
                 timer += Time.deltaTime;
 
                 if (timer > speed)
-                {
+                {   
                     timer = 0f;
                     Fire();
                 }
@@ -72,7 +75,7 @@ public class Weapon : MonoBehaviour
 
         switch (id)
         {
-            case 20: // 피스톨
+            case 0: // 피스톨
                 speed = 0.5f;
                 break;
             default: // 다른무기

@@ -24,7 +24,7 @@ public class Gear : MonoBehaviour
 
     void ApplyGear()
     {
-        switch(type)
+        switch (type)
         {
             case ItemData.ItemType.IAS:
                 RateUp();
@@ -43,7 +43,7 @@ public class Gear : MonoBehaviour
         {
             switch (weapon.id)
             {
-                case 20: // 피스톨
+                case 0: // 피스톨
                     weapon.speed = 0.5f * (1f - rate);
                     break;
                 default: // 다른무기
