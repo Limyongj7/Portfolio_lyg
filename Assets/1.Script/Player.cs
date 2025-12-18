@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     Rigidbody rd;
     Animator anim;
 
+    CapsuleCollider coll;
+
     private void Awake()
     {
         rd = GetComponent<Rigidbody>();
@@ -72,21 +74,23 @@ public class Player : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (!GameManager.instance.isLive)
+        if (!GameManager.instance.isLive || collision.gameObject.CompareTag("Ground")) // 살아 있지 않거나, 충돌체가 땅이라면 실행X
             return;
 
         GameManager.instance.health -= Time.deltaTime * 10;
 
         if (GameManager.instance.health < 0)
         {
-            for (int index = 2;  index < transform.childCount; index++)
+            for (int index = 1;  index < transform.childCount; index++)
             {
                 transform.GetChild(index).gameObject.SetActive(false);
             }
 
             anim.SetTrigger("Dead");
+            GameManager.instance.GameOver();
+           
         }
     }
-
     
+
 }
