@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public float maxGameTime = 2 * 10f;
 
     [Header("# Player Info")]
+    public int playerId; //  케릭터 변경
     public float health;
     public float maxHealth = 100;
     public int level;
@@ -32,14 +33,15 @@ public class GameManager : MonoBehaviour
    
     void Awake()
     {
-        instance = this;
+        instance = this; // 인스턴스는 이거다(초기화)
     }
 
-    public void GameStart()
+    public void GameStart(int id) // 인스펙터 창에서 직접 호출 설정
     {
-        health = maxHealth;
-        uiLevelUp.Select(0);
-        isLive = true;
+        playerId = id; //캐릭터 변경
+        health = maxHealth; // 플레이어 체력  100으로 초기화
+        player.gameObject.SetActive(true); // 캐릭터 활성화
+        uiLevelUp.Select(playerId % 1); // 캐릭터 선택 및 무기활성화
         Resume();
     }
 
