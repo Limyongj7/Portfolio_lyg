@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.48380208, g: 0.6792453, b: 0.5240956, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1516,7 +1516,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBB34\uAE30 : \uAD8C\uCD1D"
+  m_Text: "\uBB34\uAE30 : \uB3CC\uACA9\uC18C\uCD1D"
 --- !u!222 &332605597
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2568,7 +2568,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBC15\uC2A4\uB9E8"
+  m_Text: "\uAC31\uC2A4\uD130"
 --- !u!222 &601727185
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2663,7 +2663,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBC15\uC2A4\uB9E8"
+  m_Text: "\uB3C4\uB451"
 --- !u!222 &608332533
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2776,14 +2776,14 @@ RectTransform:
   m_GameObject: {fileID: 647808944}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 348139390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 230}
+  m_AnchoredPosition: {x: 0, y: 260}
   m_SizeDelta: {x: 439.56003, y: 139.72342}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &647808946
@@ -2983,8 +2983,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 451, y: 451}
+  m_AnchoredPosition: {x: 0, y: -90}
+  m_SizeDelta: {x: 431, y: 431}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &696389586
 MonoBehaviour:
@@ -3006,7 +3006,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 225, y: 225}
+  m_CellSize: {x: 215, y: 215}
   m_Spacing: {x: 1, y: 1}
   m_Constraint: 0
   m_ConstraintCount: 2
@@ -4513,6 +4513,7 @@ MonoBehaviour:
   isLive: 0
   gameTime: 0
   maxGameTime: 20
+  playerId: 0
   health: 0
   maxHealth: 100
   level: 0
@@ -4822,7 +4823,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBC15\uC2A4\uB9E8"
+  m_Text: "\uAD70\uC778"
 --- !u!222 &1201595422
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4981,7 +4982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.11066723, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6172,7 +6173,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBB34\uAE30 : \uAD8C\uCD1D"
+  m_Text: "\uBB34\uAE30 : \uB85C\uCF13"
 --- !u!222 &1535245901
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6614,7 +6615,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7175,7 +7176,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uBB34\uAE30 : \uAD8C\uCD1D"
+  m_Text: "\uBB34\uAE30 : \uAE30\uAD00\uB2E8\uCD1D"
 --- !u!222 &1792505010
 CanvasRenderer:
   m_ObjectHideFlags: 0

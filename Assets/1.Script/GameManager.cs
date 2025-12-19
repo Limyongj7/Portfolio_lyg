@@ -41,8 +41,8 @@ public class GameManager : MonoBehaviour
         playerId = id; //캐릭터 변경
         health = maxHealth; // 플레이어 체력  100으로 초기화
         player.gameObject.SetActive(true); // 캐릭터 활성화
-        uiLevelUp.Select(playerId % 1); // 캐릭터 선택 및 무기활성화
-        Resume();
+        uiLevelUp.Select(playerId % 2); // 캐릭터 선택 및 무기활성화
+        Resume(); // 시간을 다시흐르게 하고, islive 까지 true로 활성화
     }
 
     public void GameOver()
